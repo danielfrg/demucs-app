@@ -1,0 +1,15 @@
+name: algorithmia
+channels:
+  - conda-forge
+  # Additional channels where packages can come from
+  # - pytorch
+dependencies:
+  - python=3.8.6
+  - pip
+  # Your conda dependencies
+  # - numpy>=1.16.0,<2.0
+  # - pytorch>=1.7.0,<1.8.0
+  - pip:
+    # Your pip dependencies
+    - algorithmia>=1.0.0,<2.0
+    - six>=1.12.0
