@@ -14,5 +14,5 @@ Music Source Separation: Separate a song into drums, bass, vocals and others.
 content=$(tr -d "\n" < src/tracks/mixture.txt)
 JSON_STRING=$( jq -n --arg content "$content" '{predict: {base64: $content} }' )
 
-curl -X POST -d $JSON_STRING -H 'Content-Type: text/plain' -H 'Authorization: Simple YOUR_API_KEY' https://api.algorithmia.com/v1/algo/danielfrg/demucs?timeout=300
+curl -X POST -d $JSON_STRING -H 'Content-Type: application/json' -H 'Authorization: Simple YOUR_API_KEY' https://api.algorithmia.com/v1/algo/danielfrg/demucs?timeout=300
 ```
