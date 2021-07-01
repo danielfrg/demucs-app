@@ -1,0 +1,56 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        node-version: ["15"]
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: git fetch --prune --unshallow
+
+      - name: Setup NodeJS ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install JS deps
+        run: |
+          make npm-install
+
+      - name: Build website
+        run: |
+          make npm-build
+
+      - name: Push docs (master)
+        uses: jsmrcaga/action-netlify-deploy@master
+        if: (github.event_name == 'push') && endsWith(github.ref, '/main')
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_DEPLOY_TO_PROD: true
+          build_directory: js/dist
+
+      - name: Push docs (branch)
+        uses: jsmrcaga/action-netlify-deploy@master
+        if: github.event_name == 'pull_request'
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          build_directory: js/dist
+
+      - name: Upload website
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: website
+          path: js/dist
