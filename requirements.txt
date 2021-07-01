@@ -1,0 +1,13 @@
+algorithmia>=1.0.0,<2.0
+six
+requests
+demucs==2.0.3
+torch>=1.8.0,<1.9.0
+torchaudio>=0.8,<0.9
+tqdm>=4.36
+diffq>=0.1
+julius>=0.2.3
+lameenc>=1.2
+musdb>=0.4.0
+museval>=0.4.0
+treetable>=0.2.3
