@@ -82,14 +82,14 @@ export default function Convert(props) {
 
             setConverting(true);
             client.separate(base64_file).then((response) => {
-                console.log("!!!!!");
+                console.log("API Response:");
                 console.log(response);
                 if (response.error) {
                     setError(response.error);
                 } else {
                     setConverting(false);
                     const id = response.result.id;
-                    router.push(`/s#${id}`);
+                    router.push(`/song#${id}`);
                 }
             });
         };
