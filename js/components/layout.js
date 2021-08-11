@@ -1,10 +1,15 @@
 import React from "react";
 
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
-import CircularProgress from "@material-ui/core/CircularProgress";
+
+const useStyles = makeStyles((theme) => ({
+    space: {},
+}));
 
 export default function Layout({ children }) {
+    const classes = useStyles();
+
     return (
         <Grid container className="container" spacing={4}>
             <Grid item xs={12}>
@@ -14,6 +19,10 @@ export default function Layout({ children }) {
                 </header>
             </Grid>
             {children}
+            <Grid item xs={12} className={classes.space} />
+            <Grid item xs={12} className={classes.space} />
+            <Grid item xs={12} className={classes.space} />
+            <Grid item xs={12} className={classes.space} />
             <Grid item xs={12} className="inputs">
                 <footer>
                     <p>
