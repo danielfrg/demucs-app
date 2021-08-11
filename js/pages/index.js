@@ -103,7 +103,7 @@ export default function Convert(props) {
         } else {
             errorEl = (
                 <div className="error">
-                    <p>
+                    <p className="stacktrace">
                         {error.error_type ? error.error_type : "Error"}:{" "}
                         {error.message}
                     </p>
@@ -133,7 +133,7 @@ export default function Convert(props) {
                         {errorEl ? (
                             errorEl
                         ) : converting === true ? (
-                            <div className="text-center">
+                            <div className="converting">
                                 <CircularProgress color="inherit" />
                                 <p>... converting ...</p>
                                 <p>(you will be redirected once finished)</p>

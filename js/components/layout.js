@@ -11,19 +11,18 @@ export default function Layout({ children }) {
     const classes = useStyles();
 
     return (
-        <Grid container className="container" spacing={4}>
-            <Grid item xs={12}>
-                <header>
+        <Grid container className="container" direction="column">
+            <Grid item container className="header">
+                <Grid item xs={12}>
                     <h1>DEMUCS</h1>
+                </Grid>
+                <Grid item xs={12}>
                     <h2>Music Source Separation</h2>
-                </header>
+                </Grid>
             </Grid>
             {children}
-            <Grid item xs={12} className={classes.space} />
-            <Grid item xs={12} className={classes.space} />
-            <Grid item xs={12} className={classes.space} />
-            <Grid item xs={12} className={classes.space} />
-            <Grid item xs={12} className="inputs">
+            <Grid item xs className={classes.space} />
+            <Grid item className="inputs">
                 <footer>
                     <p>
                         Built by{" "}

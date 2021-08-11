@@ -10,7 +10,8 @@ body {
 
 .container {
     max-width: 50em;
-    min-height: 100vh;
+    min-height: calc(100vh - 20px);
+    height: calc(100vh - 20px);
     width: 100% !important;
     margin: 0 auto !important;
     padding: 1rem;
@@ -33,7 +34,8 @@ a {
     }
 }
 
-header {
+.header {
+    width: 100%;
     margin: 0;
     padding: 32px;
     padding-bottom: 0;
@@ -119,14 +121,13 @@ header {
         }
     }
 
-    .examples {
+    .converting {
         text-align: center;
+        margin-top: 20px;
     }
 
-    .share-url {
+    .examples {
         text-align: center;
-        font-size: 10px;
-        margin: 5px auto;
     }
 
     .results {
@@ -151,6 +152,12 @@ header {
         audio {
             width: 500px;
         }
+    }
+
+    .share-url {
+        text-align: center;
+        font-size: 10px;
+        margin: 5px auto;
     }
 }
 
