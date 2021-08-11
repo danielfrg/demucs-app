@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Convert() {
     const router = useRouter();
+    console.log("Router:");
     console.log(router);
     const path = router.asPath; // : "/song#asadfasdf"
     const paths = path.split("#");
