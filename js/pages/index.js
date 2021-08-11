@@ -148,15 +148,15 @@ export default function Convert(props) {
                     <Grid item xs={12}>
                         <p className="examples">
                             Examples:{" "}
-                            <Link href="/s/cc76a1fa5ed877224d4c3a0700e3fb7ff0251d4e574bde9a756ea068d17eb3a9">
+                            <Link href="/song#cc76a1fa5ed877224d4c3a0700e3fb7ff0251d4e574bde9a756ea068d17eb3a9">
                                 Mix 1
                             </Link>
                             ,{" "}
-                            <Link href="/s/2d8183e9aa2e73f92ae5af614dd539d26a42685bd6ba441643e5f9c37e3703e1">
+                            <Link href="/song#2d8183e9aa2e73f92ae5af614dd539d26a42685bd6ba441643e5f9c37e3703e1">
                                 Mix 2
                             </Link>
                             ,{" "}
-                            <Link href="/s/cc198d03f772d6da6d274e97d1011df8509efc7a1ea834ee87754ea4058f6b2b">
+                            <Link href="/song#cc198d03f772d6da6d274e97d1011df8509efc7a1ea834ee87754ea4058f6b2b">
                                 Trap
                             </Link>
                         </p>

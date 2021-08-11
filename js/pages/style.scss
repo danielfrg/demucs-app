@@ -11,7 +11,7 @@ body {
 .container {
     max-width: 50em;
     min-height: calc(100vh - 20px);
-    height: calc(100vh - 20px);
+    // height: calc(100vh - 20px);
     width: 100% !important;
     margin: 0 auto !important;
     padding: 1rem;
@@ -163,6 +163,7 @@ a {
 
 footer {
     color: rgba(255, 255, 255, 0.5);
+    margin-top: 50px;
     font-size: 13px;
 
     p {
