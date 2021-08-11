@@ -21,8 +21,8 @@ export default function Layout({ children }) {
                 </Grid>
             </Grid>
             {children}
-            <Grid item xs className={classes.space} />
-            <Grid item className="inputs">
+            <Grid item xs />
+            <Grid item>
                 <footer>
                     <p>
                         Built by{" "}
