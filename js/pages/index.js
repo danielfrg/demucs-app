@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Convert(props) {
     const classes = useStyles();
+    const router = useRouter();
 
     // const testError = {
     //     error_type: "TestError",
@@ -85,9 +87,9 @@ export default function Convert(props) {
                 if (response.error) {
                     setError(response.error);
                 } else {
-                    setConverting(true);
+                    setConverting(false);
                     const id = response.result.id;
-                    props.history.push(`/s/${id}`);
+                    router.push(`/s#${id}`);
                 }
             });
         };
