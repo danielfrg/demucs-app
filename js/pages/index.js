@@ -80,6 +80,8 @@ export default function Convert(props) {
 
             setConverting(true);
             client.separate(base64_file).then((response) => {
+                console.log("!!!!!");
+                console.log(response);
                 if (response.error) {
                     setError(response.error);
                 } else {
