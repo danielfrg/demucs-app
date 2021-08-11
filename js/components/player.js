@@ -1,5 +1,8 @@
 import React from "react";
 
+import Algorithm from "../lib/algorithm";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 class Player extends React.Component {
     constructor(props) {
         super(props);
@@ -12,7 +15,9 @@ class Player extends React.Component {
     }
 
     componentDidMount() {
-        const { client, algoFilePath } = this.props;
+        const { algoFilePath } = this.props;
+
+        const client = new Algorithm();
 
         client.getFile(algoFilePath).then((response) => {
             if (response.error) {
@@ -32,8 +37,8 @@ class Player extends React.Component {
     render() {
         if (this.state.loading) {
             return (
-                <div className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
+                <div className="player">
+                    <CircularProgress color="primary" size={20} />
                 </div>
             );
         }
@@ -53,13 +58,14 @@ class Player extends React.Component {
         }
 
         return (
-            // eslint-disable-next-line jsx-a11y/media-has-caption
-            <audio controls>
-                <source
-                    src={`data:audio/mp3;base64,${this.state.result}`}
-                    type="audio/mp3"
-                />
-            </audio>
+            <div className="player">
+                <audio controls>
+                    <source
+                        src={`data:audio/mp3;base64,${this.state.result}`}
+                        type="audio/mp3"
+                    />
+                </audio>
+            </div>
         );
     }
 }

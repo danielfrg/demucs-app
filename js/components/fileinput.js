@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 class FileInput extends React.Component {
     constructor(props) {
@@ -26,9 +26,11 @@ class FileInput extends React.Component {
 
     render() {
         return (
-            <Fragment>
-                <p>Select a song to be processed (max 5 MB):</p>
-                <form onSubmit={this.handleSubmit}>
+            <>
+                <p className="text-center">
+                    Select a song to be processed (max 5 MB):
+                </p>
+                <form className="file-input" onSubmit={this.handleSubmit}>
                     <label>
                         <input
                             type="file"
@@ -41,10 +43,10 @@ class FileInput extends React.Component {
                         className="btn btn-light"
                         disabled={!this.props.enabled}
                     >
-                        Submit
+                        {this.props.enabled ? "Submit" : "... loading..."}
                     </button>
                 </form>
-            </Fragment>
+            </>
         );
     }
 }
