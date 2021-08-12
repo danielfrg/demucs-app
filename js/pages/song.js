@@ -20,7 +20,8 @@ export default function Convert() {
 
     const id = paths.length < 1 ? undefined : paths[1];
 
-    const url = `http://localhost:3000/s/${id}`;
+    let url = `http://localhost:3000/s/${id}`;
+    url = `https://demucs.danielfrg.com/s/${id}`;
 
     return (
         <Layout>

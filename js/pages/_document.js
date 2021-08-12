@@ -24,14 +24,6 @@ class MyDocument extends Document {
                         content="IE=edge,chrome=1"
                     ></meta>
 
-                    <link
-                        href="https://fonts.googleapis.com/css?family=Anton|Montserrat"
-                        rel="stylesheet"
-                    />
-                    <link
-                        href="https://fonts.googleapis.com/css?family=Poppins"
-                        rel="stylesheet"
-                    />
                     <script
                         src="//algorithmia.com/v1/clients/js/algorithmia-0.2.1.js"
                         type="text/javascript"
