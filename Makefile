@@ -14,8 +14,16 @@ build: npm-build  ## Build site
 # ------------------------------------------------------------------------------
 # Python
 
+image:
+	docker build --platform linux/amd64 -t danielfrg/demucs .
+
+
+run:
+	docker run -it --platform linux/amd64 -v $(PWD)/data:/data -v $(PWD)/models:/models danielfrg/demucs
+
+
 env:
-	mamba env create
+	poetry install
 
 
 download-model:
@@ -56,6 +64,12 @@ clean: cleanjs  ## Clean build files
 
 
 cleanall: cleanalljs  ## Clean everything
+
+.PHONY: models
+models:
+	mkdir -p models/checkpoints
+	# python download.py  # This is not working on Mac M1 - we do it manually
+	curl https://dl.fbaipublicfiles.com/demucs/v3.0/demucs_quantized-07afea75.th -o ./models/checkpoints/demucs_quantized-07afea75.th
 
 
 help:  ## Show this help menu
