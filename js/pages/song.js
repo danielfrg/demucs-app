@@ -13,15 +13,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Convert() {
     const router = useRouter();
-    console.log("Router:");
-    console.log(router);
+    // console.log("Router:");
+    // console.log(router);
     const path = router.asPath; // : "/song#asadfasdf"
     const paths = path.split("#");
 
     const id = paths.length < 1 ? undefined : paths[1];
 
-    let url = `http://localhost:3000/s/${id}`;
-    url = `https://demucs.danielfrg.com/s/${id}`;
+    let url = `http://localhost:3000/song/${id}`;
+    url = `https://demucs.danielfrg.com/song/${id}`;
 
     return (
         <Layout>
@@ -38,7 +38,8 @@ export default function Convert() {
                                 <td className="track">
                                     {id ? (
                                         <Player
-                                            algoFilePath={`data://danielfrg/demucs_output/${id}-bass.mp3`}
+                                            id={id}
+                                            track="bass"
                                         ></Player>
                                     ) : null}
                                 </td>
@@ -48,7 +49,8 @@ export default function Convert() {
                                 <td className="track">
                                     {id ? (
                                         <Player
-                                            algoFilePath={`data://danielfrg/demucs_output/${id}-drums.mp3`}
+                                            id={id}
+                                            track="drums"
                                         ></Player>
                                     ) : null}
                                 </td>
@@ -58,7 +60,8 @@ export default function Convert() {
                                 <td className="track">
                                     {id ? (
                                         <Player
-                                            algoFilePath={`data://danielfrg/demucs_output/${id}-other.mp3`}
+                                            id={id}
+                                            track="other"
                                         ></Player>
                                     ) : null}
                                 </td>
@@ -68,7 +71,8 @@ export default function Convert() {
                                 <td className="track">
                                     {id ? (
                                         <Player
-                                            algoFilePath={`data://danielfrg/demucs_output/${id}-vocals.mp3`}
+                                            id={id}
+                                            track="vocals"
                                         ></Player>
                                     ) : null}
                                 </td>

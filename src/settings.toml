@@ -1,0 +1,3 @@
+MODELS = "../models/"
+DATA = "../data/"
+IN_DOCKER = false

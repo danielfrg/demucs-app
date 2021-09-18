@@ -25,11 +25,6 @@ class MyDocument extends Document {
                     ></meta>
 
                     <script
-                        src="//algorithmia.com/v1/clients/js/algorithmia-0.2.1.js"
-                        type="text/javascript"
-                    ></script>
-
-                    <script
                         async
                         src={`https://www.googletagmanager.com/gtag/js?id=${SiteConfig.trackingID}`}
                     />

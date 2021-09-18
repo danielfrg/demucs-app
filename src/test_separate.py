@@ -1,18 +1,20 @@
-import sys
+import os
 import subprocess
+import sys
 from pathlib import Path
 
 import julius
 import torch as th
 import torchaudio as ta
-
 from demucs.audio import AudioFile, convert_audio_channels
 from demucs.pretrained import load_pretrained
 from demucs.utils import apply_model
 
+from config import settings
 
-out = Path("/data/separated")
-track = Path("/data/tracks/mixture.mp3")
+
+track = Path("../data/tracks/mixture.mp3")
+out = Path(os.path.join(settings.data, "separated"))
 
 shifts = 0
 split = True
@@ -23,7 +25,7 @@ float32 = False
 mp3_bitrate = 320
 verbose = True
 
-th.hub.set_dir("/models/")
+th.hub.set_dir(settings.models)
 model = load_pretrained(model_id)
 
 if not th.cuda.is_available():

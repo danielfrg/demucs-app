@@ -1,35 +1,36 @@
 class Algorithm {
     constructor() {
-        // This is being loaded on the HTML head
-        const Algorithmia = window.Algorithmia;
-
-        this.client = Algorithmia.client("simhcwLH5wkxwTnyMVJFazxsHqG1");
+        this.host = process.env.NEXT_PUBLIC_API_HOST
     }
 
-    ping() {
-        return this.client.algo("danielfrg/demucs/0.1.0").pipe({ ping: "" });
+    getHost() {
+        return this.host
     }
 
-    health() {
-        return this.client.algo("danielfrg/demucs/0.1.0").pipe({ health: "" });
+    live() {
+        return fetch(this.host + "/health/live");
+    }
+
+    ready() {
+        return fetch(this.host + "/health/ready");
     }
 
     load() {
-        return this.client
-            .algo("danielfrg/demucs/0.1.0?timeout=600")
-            .pipe({ load: "" });
+        return fetch(this.host + "/load");
     }
 
-    separate(base64_file) {
-        return this.client
-            .algo("danielfrg/demucs/0.1.0?timeout=600")
-            .pipe({ predict: { base64: base64_file } });
+    separate(file) {
+        var data = new FormData()
+        data.append("file", file, file.name)
+
+        return fetch(this.host + "/infer", {
+            method: "POST",
+            body: data
+        });
     }
 
-    getFile(algoFilePath) {
-        return this.client
-            .algo("ANaimi/Base64DataConverter/0.1.2?timeout=300")
-            .pipe(algoFilePath);
+    getFile(id, track) {
+        return fetch(`${this.host}/file/${id}${track}`);
     }
 }
 

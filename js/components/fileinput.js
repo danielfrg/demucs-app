@@ -16,7 +16,7 @@ class FileInput extends React.Component {
         }
 
         const sizeMB = file.size / 1024 / 1024;
-        if (sizeMB > 5) {
+        if (sizeMB > 10) {
             alert("File is to big. Max size: 5 MB");
             return;
         }
