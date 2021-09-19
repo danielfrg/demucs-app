@@ -2,17 +2,11 @@
 
 ## Model API
 
-Create conda env
+Create env
 
 ```
-mamba env create
-conda activate demucs-app
-```
-
-Run the code in `src`:
-
-```
-python algorithmia_entrypoint.py
+make env
+source .venv/bin/activate
 ```
 
 ## JavaScript App
@@ -21,4 +15,12 @@ python algorithmia_entrypoint.py
 cd js
 npm i
 npm run dev
+```
+
+## Docker image
+
+```shell
+# Download model
+make models
+make image
 ```

@@ -9,18 +9,45 @@ MAKEFLAGS += --no-builtin-rules
 first: help
 
 
-build: npm-build  ## Build site
+build: npm-build image  ## Build everything
+
+
+# ------------------------------------------------------------------------------
+# Docker
+
+image:
+	docker build --platform linux/amd64 -t danielfrg/demucs .
+
+
+run:
+	docker run -it --platform linux/amd64 -p 8000:8000 -v $(PWD)/data:/data danielfrg/demucs
+
+
+run-bash:
+	docker run -it --platform linux/amd64 -p 8000:8000 -v $(PWD)/data:/data danielfrg/demucs bash
+
+
+npm-build-docker:  ## Build website for docker
+	cd $(CURDIR)/js; npm run build:docker
+	cd $(CURDIR)/js; npm run export
+
 
 # ------------------------------------------------------------------------------
 # Python
 
-env:
-	mamba env create
+env:  ## Make Python environment
+	poetry install
 
 
-download-model:
-	python download.py
+fmt:  ## Format source
+	cd $(CURDIR)/src; isort .
+	cd $(CURDIR)/src; black .
 
+
+check:  ## Check code quality
+	cd $(CURDIR)/src; flake8
+	cd $(CURDIR)/src; isort . --check-only --diff
+	cd $(CURDIR)/src; black . --check
 
 # ------------------------------------------------------------------------------
 # Build (JS)
@@ -56,6 +83,13 @@ clean: cleanjs  ## Clean build files
 
 
 cleanall: cleanalljs  ## Clean everything
+
+
+models:  ## Download models
+	mkdir -p models/checkpoints
+	# python download.py  # This is not working on Mac M1 - we do it manually
+	curl https://dl.fbaipublicfiles.com/demucs/v3.0/demucs_quantized-07afea75.th -o ./models/checkpoints/demucs_quantized-07afea75.th
+.PHONY: models
 
 
 help:  ## Show this help menu

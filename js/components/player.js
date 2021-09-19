@@ -1,73 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 
 import Algorithm from "../lib/algorithm";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-class Player extends React.Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            loading: true,
-            result: "",
-            error: "",
-        };
-    }
+export default function Player({ id, track }) {
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(0);
 
-    componentDidMount() {
-        const { algoFilePath } = this.props;
+    const client = new Algorithm();
+    const host = client.getHost();
+    const url = `${host}/file/${id}/${track}`
 
-        const client = new Algorithm();
-
-        client.getFile(algoFilePath).then((response) => {
-            if (response.error) {
-                this.setState({
-                    loading: false,
-                    error: response.error,
-                });
-            } else {
-                this.setState({
-                    loading: false,
-                    result: response.result,
-                });
+    useEffect(() => {
+        fetch(url, { method: "HEAD" }).then(response => {
+            if (response.status == 200) {
+                setLoading(false);
+            }
+            else {
+                setError("File not found")
             }
         });
-    }
+    });
 
-    render() {
-        if (this.state.loading) {
-            return (
-                <div className="player">
-                    <CircularProgress color="primary" size={20} />
-                </div>
-            );
-        }
-
-        if (this.state.error) {
-            return (
-                <div className="error">
-                    <p className="stacktrace">
-                        {this.state.error.error_type
-                            ? this.state.error.error_type
-                            : "Error"}
-                        : {this.state.error.message}
-                    </p>
-                    <p className="stacktrace">{this.state.error.stacktrace}</p>
-                </div>
-            );
-        }
-
+    if (error) {
         return (
             <div className="player">
-                <audio controls>
-                    <source
-                        src={`data:audio/mp3;base64,${this.state.result}`}
-                        type="audio/mp3"
-                    />
-                </audio>
+                <p>{error}</p>
             </div>
         );
     }
-}
 
-export default Player;
+    if (loading) {
+        return (
+            <div className="player">
+                <CircularProgress color="primary" size={20} />
+            </div>
+        );
+    }
+
+    return (
+        <div className="player">
+            <audio controls>
+                <source
+                    src={url}
+                    type="audio/mp3"
+                />
+            </audio>
+        </div>
+    );
+}
