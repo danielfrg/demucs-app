@@ -1,3 +1,11 @@
+[default]
 MODELS = "../models/"
 DATA = "../data/"
+STATIC = "../"
 IN_DOCKER = false
+
+[docker]
+MODELS = "/models"
+DATA = "/data"
+STATIC = "/app"
+IN_DOCKER = true

@@ -26,10 +26,14 @@ export default function Layout({ children }) {
                 <footer>
                     <p>
                         Built by{" "}
-                        <a href="https://danielfrg.com">Daniel Rodriguez</a>.
-                        Powered by{" "}
-                        <a href="https://algorithmia.com/algorithms/danielfrg/demucs">
-                            Algorithmia
+                        <a href="https://danielfrg.com">Daniel Rodriguez</a>
+                        .{" "}
+                        <a href="https://danielfrg.com/blog/2020/10/demucs">
+                            Read the blogpost
+                        </a>
+                        .{" "}
+                        <a href="https://hub.docker.com/repository/docker/danielfrg/demucs">
+                            Docker container
                         </a>
                         .{" "}
                         <a href="https://github.com/danielfrg/demucs-app">

@@ -15,11 +15,12 @@ class FileInput extends React.Component {
             return;
         }
 
-        const sizeMB = file.size / 1024 / 1024;
-        if (sizeMB > 10) {
-            alert("File is to big. Max size: 5 MB");
-            return;
-        }
+        // File limit
+        // const sizeMB = file.size / 1024 / 1024;
+        // if (sizeMB > 10) {
+        //     alert("File is to big. Max size: 10 MB");
+        //     return;
+        // }
 
         this.props.request(file);
     }

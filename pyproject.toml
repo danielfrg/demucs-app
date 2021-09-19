@@ -10,10 +10,14 @@ requires = ["poetry-core>=1.0.0", "setuptools", "setuptools_scm", "wheel"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+dynaconf = "^3.1.7"
 torch = "^1.9.0"
 torchaudio = "^0.9.0"
 demucs = "^2.0.3"
 fastapi = "^0.68.1"
+uvicorn = "^0.15.0"
+python-multipart = "^0.0.5"
+aiofiles = "^0.7.0"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.10.2"

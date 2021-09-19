@@ -1,6 +1,7 @@
 class Algorithm {
     constructor() {
         this.host = process.env.NEXT_PUBLIC_API_HOST
+        console.log("API host: " + this.host)
     }
 
     getHost() {

@@ -34,7 +34,7 @@ class Demucs(object):
 
     def load(self):
         if self.model is None:
-            th.hub.set_dir("./models/")
+            th.hub.set_dir(settings.models)
             self.model = load_pretrained(self.model_id)
             self.device = "cuda" if th.cuda.is_available() else "cpu"
 

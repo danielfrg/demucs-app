@@ -3,9 +3,10 @@ import shutil
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 
-from fastapi import FastAPI, File, HTTPException, Request, UploadFile
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import Response, FileResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
 
 import model
 from config import settings
@@ -13,7 +14,7 @@ from config import settings
 
 autoload = settings.in_docker
 outdir = os.path.join(settings.data, "separated")
-model_ = model.Demucs(output_dir=outdir, load=autoload)
+model_ = model.Demucs(output_dir=outdir, load=False)
 
 
 app = FastAPI()
@@ -27,10 +28,29 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+static_js = os.path.join(settings.static, "js/out")
+app.mount("/static", StaticFiles(directory=static_js), name="static")
+app.mount(
+    "/_next",
+    StaticFiles(directory=os.path.join(static_js, "_next")),
+    name="static_next",
+)
+
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    index_file = os.path.join(static_js, "index.html")
+    with open(index_file) as f:
+        html_content = f.read()
+    return HTMLResponse(content=html_content, status_code=200)
+
+
+@app.get("/song.html")
+async def song():
+    index_file = os.path.join(static_js, "song.html")
+    with open(index_file) as f:
+        html_content = f.read()
+    return HTMLResponse(content=html_content, status_code=200)
 
 
 @app.get("/health/live", status_code=200)
@@ -61,17 +81,18 @@ async def invocations(file: UploadFile = File(...)):
     return predict(file)
 
 
-@app.post("/files")
-async def create_file(request: Request):
-    form = await request.form()
-    files = form.getlist("files")
-    print(files)
-
-
 @app.get("/file/{unique_id}/{track}")
 async def download_file(unique_id, track):
     fpath = os.path.join(outdir, unique_id, f"{track}.mp3")
     return FileResponse(fpath)
+
+
+@app.head("/file/{unique_id}/{track}")
+async def download_file_exists(unique_id, track):
+    fpath = os.path.join(outdir, unique_id, f"{track}.mp3")
+    if os.path.exists(fpath):
+        return Response()
+    raise HTTPException(status_code=404, detail="File not found")
 
 
 def predict(file):
