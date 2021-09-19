@@ -96,7 +96,7 @@ async def download_file_exists(unique_id, track):
 
 
 def predict(file):
-    # model_.load()
+    model_.load()
 
     with NamedTemporaryFile(delete=False) as tmp:
         shutil.copyfileobj(file.file, tmp)
