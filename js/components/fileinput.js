@@ -28,9 +28,7 @@ class FileInput extends React.Component {
     render() {
         return (
             <>
-                <p className="text-center">
-                    Select a song to be processed (max 5 MB):
-                </p>
+                <p className="text-center">Select a song to be processed:</p>
                 <form className="file-input" onSubmit={this.handleSubmit}>
                     <label>
                         <input
