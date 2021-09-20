@@ -37,7 +37,7 @@ jobs:
 
       - name: Build website
         run: |
-          make build-algoritmia
+          make build-algorithmia
 
       - name: Push website (master)
         uses: jsmrcaga/action-netlify-deploy@master

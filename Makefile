@@ -32,7 +32,7 @@ npm-build-docker:  ## Build website for docker
 	cd $(CURDIR)/js; npm run export
 
 
-npm-build-algorithmai:  ## Build website for algorithmia
+npm-build-algorithmia:  ## Build website for algorithmia
 	cd $(CURDIR)/js; npm run build:algorithmia
 	cd $(CURDIR)/js; npm run export
 
