@@ -23,34 +23,42 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Load cached node_modules
+        id: cached-node_modules-dependencies
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ runner.os }}-${{ hashFiles('**/package*.json') }}
+
       - name: Install JS deps
+        if: steps.cached-node_modules-dependencies.outputs.cache-hit != 'true'
         run: |
           make npm-install
 
       - name: Build website
         run: |
-          make build
+          make build-algoritmia
 
-      # - name: Push website (master)
-      #   uses: jsmrcaga/action-netlify-deploy@master
-      #   if: (github.event_name != 'pull_request') && endsWith(github.ref, '/main')
-      #   with:
-      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      #     NETLIFY_DEPLOY_TO_PROD: true
-      #     build_directory: js/out
+      - name: Push website (master)
+        uses: jsmrcaga/action-netlify-deploy@master
+        if: (github.event_name != 'pull_request') && endsWith(github.ref, '/main')
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_DEPLOY_TO_PROD: true
+          build_directory: js/out
 
-      # - name: Push website (branch)
-      #   uses: jsmrcaga/action-netlify-deploy@master
-      #   if: github.event_name == 'pull_request'
-      #   with:
-      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      #     build_directory: js/out
+      - name: Push website (branch)
+        uses: jsmrcaga/action-netlify-deploy@master
+        if: github.event_name == 'pull_request'
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          build_directory: js/out
 
-      # - name: Upload website
-      #   uses: actions/upload-artifact@v1
-      #   if: always()
-      #   with:
-      #     name: website
-      #     path: js/out
+      - name: Upload website
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: website
+          path: js/out

@@ -7,22 +7,25 @@
         "build": "next build",
         "start": "next start",
         "export": "next export",
-        "build:docker": "env-cmd -f .env.docker next build"
+        "build:docker": "env-cmd -f .env.docker next build",
+        "build:algorithmia": "env-cmd -f .env.algorithmia next build"
     },
     "dependencies": {
-        "@material-ui/core": "^4.12.3",
         "@next/bundle-analyzer": "^11.0.1",
-        "algorithmia": "^0.3.10",
-        "eslint": "^7.32.0",
-        "eslint-config-next": "^11.0.1",
-        "eslint-plugin-react": "^7.24.0",
+        "@tailwindcss/typography": "^0.4.1",
         "next": "^11.0.1",
         "react": "17.0.2",
         "react-dom": "17.0.2",
-        "sass": "^1.37.5",
-        "styled-components": "^5.3.0"
+        "tailwindcss": "^2.2.15"
     },
     "devDependencies": {
+        "autoprefixer": "^10.3.4",
+        "eslint": "^7.32.0",
+        "eslint-config-next": "^11.0.1",
+        "eslint-plugin-react": "^7.24.0",
+        "postcss": "^8.3.6",
+        "postcss-import": "^14.0.2",
+        "styled-components": "^5.3.0",
         "env-cmd": "^10.1.0"
     }
 }

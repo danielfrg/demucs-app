@@ -16,20 +16,33 @@ class FileInput extends React.Component {
         }
 
         // File limit
-        // const sizeMB = file.size / 1024 / 1024;
-        // if (sizeMB > 10) {
-        //     alert("File is to big. Max size: 10 MB");
-        //     return;
-        // }
+        const host = process.env.NEXT_PUBLIC_API_HOST;
+        if (host == "algorithmia") {
+            const sizeMB = file.size / 1024 / 1024;
+            if (sizeMB > 5) {
+                alert("File is to big. Max size: 5 MB");
+                return;
+            }
+        }
 
         this.props.request(file);
     }
 
     render() {
+        const host = process.env.NEXT_PUBLIC_API_HOST;
+
         return (
-            <>
-                <p className="text-center">Select a song to be processed:</p>
-                <form className="file-input" onSubmit={this.handleSubmit}>
+            <div className="mt-10 mb-3 flex flex-col text-gray-100 font-thin">
+                <p className="text-center my-3">
+                    {`Select a song to be processed ${
+                        host == "algorithmia" ? "(max 5 MB)" : ""
+                    }`}
+                    :
+                </p>
+                <form
+                    className="bg-gray-700 p-10 text-center"
+                    onSubmit={this.handleSubmit}
+                >
                     <label>
                         <input
                             type="file"
@@ -39,13 +52,13 @@ class FileInput extends React.Component {
                     </label>
                     <button
                         type="submit"
-                        className="btn btn-light"
+                        className="bg-gray-300 hover:bg-gray-100 text-gray-800 py-1 px-4 border border-gray-400 rounded"
                         disabled={!this.props.enabled}
                     >
                         {this.props.enabled ? "Submit" : "... loading..."}
                     </button>
                 </form>
-            </>
+            </div>
         );
     }
 }

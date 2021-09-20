@@ -11,19 +11,28 @@ class MyDocument extends Document {
 
     render() {
         return (
-            <Html>
+            <Html lang="en">
                 <Head>
                     <meta charSet="utf-8" />
-                    <link
-                        rel="shortcut icon"
-                        type="image/png"
-                        href="/favicon.png"
+                    <meta
+                        name="description"
+                        content="demucs online app - Music source separation"
                     />
                     <meta
                         httpEquiv="X-UA-Compatible"
                         content="IE=edge,chrome=1"
                     ></meta>
 
+                    <link
+                        rel="shortcut icon"
+                        type="image/png"
+                        href="/favicon.png"
+                    />
+
+                    <script
+                        src="//algorithmia.com/v1/clients/js/algorithmia-0.2.1.js"
+                        type="text/javascript"
+                    ></script>
                     <script
                         async
                         src={`https://www.googletagmanager.com/gtag/js?id=${SiteConfig.trackingID}`}
@@ -39,7 +48,8 @@ class MyDocument extends Document {
                         }}
                     />
                 </Head>
-                <body>
+
+                <body className="w-full h-full bg-blue">
                     <Main />
                     <NextScript />
                 </body>
