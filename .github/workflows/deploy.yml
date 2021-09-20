@@ -27,8 +27,8 @@ jobs:
         id: cached-node_modules-dependencies
         uses: actions/cache@v2
         with:
-          path: node_modules
-          key: node_modules-${{ runner.os }}-${{ hashFiles('**/package*.json') }}
+          path: js/node_modules
+          key: node_modules-${{ runner.os }}-${{ hashFiles('js/package*.json') }}
 
       - name: Install JS deps
         if: steps.cached-node_modules-dependencies.outputs.cache-hit != 'true'
