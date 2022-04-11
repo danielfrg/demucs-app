@@ -10,10 +10,6 @@ jobs:
   deploy:
     runs-on: ubuntu-20.04
 
-    strategy:
-      matrix:
-        node-version: ["16"]
-
     steps:
       - uses: actions/checkout@v2
       - run: git fetch --prune --unshallow
@@ -21,10 +17,10 @@ jobs:
       # ------------------------------------------------------------------------
       # Setup
 
-      - name: Setup Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js 16
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16
 
       - name: Load cached node_modules
         id: cached-node_modules-dependencies
@@ -52,7 +48,7 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: netlify/actions/cli@master
         with:
-          args: deploy --dir=out
+          args: deploy --dir=js/out
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -61,7 +57,7 @@ jobs:
         if: (github.event_name != 'pull_request') && endsWith(github.ref, '/main')
         uses: netlify/actions/cli@master
         with:
-          args: deploy --dir=out --prod
+          args: deploy --dir=js/out --prod
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
